@@ -1,26 +1,187 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Forest ramp + sage canvas, extracted verbatim from the Stitch export's
+     `tailwind.config` block. These are the only colors the design defines. */
+  --color-sage-bg: #eaf0ea;
+  --color-forest: #0b3b24;
+  --color-forest-hover: #072718;
+  --color-forest-light: #135c39;
+  --color-forest-50: #f0f7f3;
+  --color-forest-100: #dceee3;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Not part of the Stitch palette. Extension added to carry the low-contrast
+     accent the design uses on dark surfaces (footer icons) and for hairline
+     pill borders. Delete these four usages if you want strict parity. */
+  --color-forest-200: #bcdcc7;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Default body copy is a near-black green, not the forest brand color.
+     The export sets this on `body` in a plain <style> block. */
+  --color-ink: #1c2b22;
+
+  --font-sans: var(--font-jakarta), "Inter", sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+
+  /* Depth for the glass system. Tailwind's stock shadows are neutral black, which
+     reads as grey haze over a pale sage canvas; these carry the brand hue
+     instead, so lifted panels stay in the same light as everything around them. */
+  --shadow-nav: 0 14px 34px -18px rgb(11 59 36 / 0.3);
+  --shadow-glass-lift: 0 28px 60px -22px rgb(11 59 36 / 0.28);
+  --shadow-float: 0 40px 80px -28px rgb(11 59 36 / 0.38);
+
+  /* The export calls animate-fadeIn on every wizard step but never defines the
+     keyframes, so the class is inert there. Defined here so step transitions
+     actually cross-fade. */
+  --animate-fade-in: fade-in 0.3s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Drift for the fixed mesh-gradient field behind the content. transform +
+     scale only, so the whole field composites on the GPU and never triggers
+     layout. Each blob runs a different duration and phase on `alternate`, so
+     the group never resolves into a visible loop. */
+  --animate-mesh-drift-a: mesh-drift-a 34s ease-in-out infinite alternate;
+  --animate-mesh-drift-b: mesh-drift-b 41s ease-in-out -8s infinite alternate;
+  --animate-mesh-drift-c: mesh-drift-c 47s ease-in-out -19s infinite alternate;
+  --animate-mesh-drift-d: mesh-drift-d 39s ease-in-out -3s infinite alternate;
+  --animate-mesh-drift-e: mesh-drift-e 53s ease-in-out -31s infinite alternate;
+
+  @keyframes mesh-drift-a {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(5%, -6%, 0) scale(1.14);
+    }
+  }
+
+  @keyframes mesh-drift-b {
+    from {
+      transform: translate3d(0, 0, 0) scale(1.12);
+    }
+    to {
+      transform: translate3d(-7%, 5%, 0) scale(0.94);
+    }
+  }
+
+  @keyframes mesh-drift-c {
+    from {
+      transform: translate3d(0, 0, 0) scale(0.94);
+    }
+    to {
+      transform: translate3d(6%, -7%, 0) scale(1.2);
+    }
+  }
+
+  @keyframes mesh-drift-d {
+    from {
+      transform: translate3d(0, 0, 0) scale(1.05);
+    }
+    to {
+      transform: translate3d(-5%, -5%, 0) scale(1);
+    }
+  }
+
+  @keyframes mesh-drift-e {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(8%, 4%, 0) scale(1.1);
+    }
   }
 }
 
+/* One soft blob of the background field. The falloff to transparent *is* the
+   blur: a radial gradient on one layer costs a fraction of `filter: blur()` on
+   a 700px box, and it cannot band or clip at the element's edge the way a
+   filter boundary does. Colour comes in per-blob from `--blob-color`. */
+@utility mesh-blob {
+  position: absolute;
+  border-radius: 9999px;
+  background-image: radial-gradient(
+    closest-side,
+    var(--blob-color) 0%,
+    color-mix(in oklab, var(--blob-color) 55%, transparent) 48%,
+    transparent 100%
+  );
+  will-change: transform;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Firefox equivalent of the webkit scrollbar rules below. */
+  scrollbar-color: rgb(11 59 36 / 0.25) var(--color-sage-bg);
+  scrollbar-width: thin;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-sage-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Text selection ships with browser defaults that belong to no design system.
+   On a pale sage canvas the default blue reads as a different product. */
+::selection {
+  background-color: color-mix(in oklab, var(--color-forest) 20%, transparent);
+  color: var(--color-forest);
+}
+
+/* The glass panels raise the perceived contrast of their own text, so focus has
+   to be carried by an explicit ring rather than by a darkening of the surface
+   behind the control. */
+:focus-visible {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 2px;
+}
+
+/* Form fields draw their own ring on focus; a second global outline on top of
+   it is a double line. */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 0;
+}
+
+/* Custom scrollbar, straight from the export's <style> block: 8px track in
+   sage, forest thumb at 25% opacity that deepens to 50% on hover. */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-sage-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(11 59 36 / 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(11 59 36 / 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* The field freezes at its composed position rather than disappearing; the
+     glass still reads, it just stops moving. */
+  .mesh-blob {
+    animation: none;
+  }
 }

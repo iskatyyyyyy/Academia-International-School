@@ -33,9 +33,16 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# opencode local config and secrets
+/opencode.json
+/opencode.jsonc
+/.secrets/
+
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+opencode.json

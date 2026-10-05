@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -37,13 +38,17 @@ export default function SiteHeader() {
   return (
     <header className="absolute top-0 z-50 w-full bg-transparent pt-4">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6">
-        <Link href="/" className="group flex shrink-0 items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-forest font-serif text-xl font-bold text-white shadow-sm transition-transform group-hover:scale-105">
-            A
-          </span>
+        <Link href="/" className="group flex shrink-0 items-center gap-4">
+          <Image
+            src="/aid-logo.png"
+            alt="Academia International School logo"
+            width={499}
+            height={500}
+            className="h-16 w-16 shrink-0 object-contain transition-transform group-hover:scale-105"
+          />
           <span>
             <span className="block font-serif text-lg font-bold leading-none tracking-tight text-forest">
-              Academia
+              Academia International
             </span>
             <span className="text-[11px] font-semibold uppercase tracking-widest text-forest">
               Al-noor Educational Center

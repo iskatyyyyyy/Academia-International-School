@@ -2,12 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // Unsplash is reached through a custom loader, which rewrites ?w / ?q
-    // itself, so it is registered globally instead of per-instance. Passing
-    // the loader as a prop from a Server Component is not allowed, since
-    // functions cannot cross the RSC boundary.
-    loader: "custom",
-    loaderFile: "./app/lib/unsplash-loader.ts",
+    // The default loader. A custom `loaderFile` previously rewrote bare
+    // Unsplash photo ids into full URLs, but Next disables its own image
+    // optimizer whenever `loader` is anything but `default`, so every local
+    // photograph in /public was served raw. Components now pass full URLs
+    // (see app/lib/unsplash.ts) and no query string of their own, so the
+    // default loader can append `w`/`q` through /_next/image for both local
+    // and remote images.
     remotePatterns: [
       {
         protocol: "https",

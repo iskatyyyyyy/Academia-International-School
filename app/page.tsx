@@ -1,13 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "./components/site-header";
 import SiteFooter from "./components/site-footer";
 import MeshBackground from "./components/mesh-background";
 import { ProgramsPanel } from "./components/programs-panel";
 import { GalleryCarousel } from "./components/gallery-carousel";
+import { HeroSlideshow } from "./components/hero-slideshow";
 import { AdmissionsForm } from "./components/admissions-form";
 import { ContactForm } from "./components/contact-form";
-import { UNSPLASH } from "./lib/unsplash";
 
 const STATS = [
   { value: "1 : 8", label: "Teacher-Student Ratio" },
@@ -69,15 +68,7 @@ export default function Home() {
       <main id="top" className="flex-1">
         {/* Edge-to-edge hero */}
         <div className="relative flex min-h-[560px] items-center justify-center overflow-hidden pb-28 pt-24 sm:min-h-[640px] lg:min-h-[700px] lg:pb-32">
-          <Image
-            src={UNSPLASH.hero}
-            alt="Grade School classroom at Academia International"
-            fill
-            priority
-            sizes="100vw"
-            quality={75}
-            className="scale-105 object-cover object-center"
-          />
+          <HeroSlideshow />
           {/* A light haze off the top edge, not a full-screen scrim. The glass
               header and the glass headline card both need a light field to hold
               forest-green type over a photograph. */}

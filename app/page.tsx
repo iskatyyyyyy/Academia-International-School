@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import SiteHeader from "./components/site-header";
 import SiteFooter from "./components/site-footer";
 import MeshBackground from "./components/mesh-background";
@@ -85,9 +86,7 @@ const ArrowRight = (
 export default function Home() {
   return (
     <>
-      <SiteHeader />
       <MeshBackground />
-
       <SiteHeader />
 
       <main id="top" className="flex-1">
@@ -246,12 +245,12 @@ export default function Home() {
                   Campus Highlights &amp; Smiling Faces
                 </h2>
               </div>
-              <a
-                href="#campus"
+              <Link
+                href="/campus-life"
                 className="hidden rounded-full border border-white/60 bg-white/40 px-5 py-2 text-xs font-semibold text-forest backdrop-blur-md transition hover:bg-white/60 sm:inline-flex"
               >
                 View Full Gallery
-              </a>
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4">

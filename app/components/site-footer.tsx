@@ -1,16 +1,16 @@
 const EXPLORE = [
   { href: "#top", label: "Home Page" },
-  { href: "#programs", label: "Grade School Programs" },
+  { href: "#programs", label: "Programs" },
   { href: "#enrollment", label: "Enrollment Roadmap" },
   { href: "#campus", label: "Campus Gallery & Life" },
 ];
 
 const ACADEMICS = [
-  "Kindergarten (Ages 4-5)",
-  "Lower Primary (Grades 1-3)",
-  "Upper Primary (Grades 4-5)",
+  "Kindergarten",
+  "Grade School",
+  "Junior High School",
+  "Senior High School",
   "Arabic & Islamic Studies",
-  "STEM & Robotics Lab",
 ];
 
 const SOCIAL = [

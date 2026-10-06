@@ -4,6 +4,7 @@ import SiteHeader from "./components/site-header";
 import SiteFooter from "./components/site-footer";
 import MeshBackground from "./components/mesh-background";
 import { ProgramsPanel } from "./components/programs-panel";
+import { GalleryCarousel } from "./components/gallery-carousel";
 import { AdmissionsForm } from "./components/admissions-form";
 import { ContactForm } from "./components/contact-form";
 import { UNSPLASH } from "./lib/unsplash";
@@ -39,30 +40,6 @@ const STEPS = [
     title: "Offer & Welcome",
     desc: "Official seat offer extended, orientation pack issued, and uniform fitting scheduled.",
     time: "Within 5 Days",
-  },
-];
-
-const HIGHLIGHTS = [
-  {
-    id: UNSPLASH.readingLoft,
-    alt: "Students reading in the modern library",
-    kicker: "Modern Learning Commons",
-    title: "The Junior Reading Loft & Maker Corner",
-    wide: true,
-  },
-  {
-    id: UNSPLASH.artStudio,
-    alt: "Pottery and watercolor projects in the art studio",
-    kicker: "Visual Arts",
-    title: "Pottery & Watercolor Studio",
-    wide: false,
-  },
-  {
-    id: UNSPLASH.sportsPitch,
-    alt: "Children playing on the outdoor sports pitch",
-    kicker: "Recreation",
-    title: "Shaded AstroTurf Sports Pitch",
-    wide: false,
   },
 ];
 
@@ -166,7 +143,7 @@ export default function Home() {
 
         <div className="mx-auto max-w-7xl space-y-20 px-5 py-16 sm:px-6 md:space-y-28 md:py-24">
           <ProgramsPanel
-            heading="Featured Grade School Programs"
+            heading="Our Programs"
             kicker="Academic Pathways"
             detailsHref="#enrollment"
             ctaHref="#enrollment"
@@ -253,33 +230,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4">
-              {HIGHLIGHTS.map((item) => (
-                <figure
-                  key={item.title}
-                  className={`group relative h-72 overflow-hidden rounded-3xl border border-white/50 shadow-xl ${
-                    item.wide ? "md:col-span-2" : ""
-                  }`}
-                >
-                  <Image
-                    src={item.id}
-                    alt={item.alt}
-                    fill
-                    sizes="(min-width: 768px) 40vw, 100vw"
-                    quality={75}
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                  />
-                  <figcaption className="absolute inset-0 flex items-end bg-gradient-to-t from-black/70 via-black/20 to-transparent p-5 text-white">
-                    <div>
-                      <span className="text-[11px] font-semibold uppercase tracking-wider text-forest-200">
-                        {item.kicker}
-                      </span>
-                      <h3 className="font-serif text-lg font-bold">{item.title}</h3>
-                    </div>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
+            <GalleryCarousel />
           </section>
 
           <section id="admissions" className="scroll-mt-24 space-y-8">

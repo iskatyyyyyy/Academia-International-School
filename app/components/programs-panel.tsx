@@ -1,39 +1,51 @@
 import Image from "next/image";
-import { UNSPLASH } from "../lib/unsplash";
+import { UNSPLASH, type UnsplashId } from "../lib/unsplash";
 
 /**
- * Grade school program content, verbatim from the Stitch mockup.
+ * Program content for the home page panel and the standalone view.
  *
  * Copy and data live here rather than in the view so Home and /programs render
- * the same three pathways from one source and cannot drift apart.
+ * the same pathways from one source and cannot drift apart.
  */
-const PROGRAMS = [
+type Program = {
+  image: UnsplashId;
+  alt: string;
+  title: string;
+  body?: string;
+  tags?: readonly string[];
+  cta: string;
+};
+
+const PROGRAMS: readonly Program[] = [
   {
-    id: UNSPLASH.kindergarten,
+    image: UNSPLASH.kindergarten,
     alt: "Kindergarten children at play",
-    ages: "Ages 4 – 5",
-    title: "Kindergarten (KG 1 - KG 2)",
+    title: "Kindergarten",
     body: "Structured play-based learning that awakens phonics, early numeracy, emotional regulation, and joyful social collaboration in a warm, welcoming setting.",
     tags: ["Sensory Play", "Arabic Foundations"],
     cta: "Explore Kindergarten",
   },
   {
-    id: UNSPLASH.lowerPrimary,
-    alt: "Lower primary students working together",
-    ages: "Grades 1 – 3",
-    title: "Lower Primary",
-    body: "Laying deep foundational literacy, mathematical reasoning, introductory sciences, and creative expression through guided project discovery.",
-    tags: ["Guided Literacy", "STEM Discovery"],
-    cta: "Explore Lower Primary",
+    image: UNSPLASH.lowerPrimary,
+    alt: "Students working together",
+    title: "Grade School",
+    body: "Building reading fluency and mathematical reasoning through collaborative scientific investigations, project-based inquiry, computational robotics, debate, and student leadership.",
+    tags: ["Guided Literacy", "STEM Discovery", "Research & Debate"],
+    cta: "Explore Grade School",
   },
   {
-    id: UNSPLASH.upperPrimary,
-    alt: "Upper primary students in a science classroom",
-    ages: "Grades 4 – 5",
-    title: "Upper Primary",
-    body: "Empowering independent thinkers, student leadership, advanced problem solving, and preparation for seamless transition into Middle School.",
-    tags: ["Research & Debate", "Middle Prep"],
-    cta: "Explore Upper Primary",
+    image: UNSPLASH.upperPrimary,
+    alt: "Students in a science classroom",
+    title: "Junior High School",
+    cta: "Explore Junior High School",
+  },
+  {
+    image: UNSPLASH.classroom,
+    alt: "Students working together at classroom desks",
+    title: "Senior High School",
+    body: "Senior High School offers six strands: STEM, ABM, HUMSS, GAS, TVL-HE, and TVL-ICT.",
+    tags: ["STEM", "ABM", "HUMSS", "GAS", "TVL-HE", "TVL-ICT"],
+    cta: "Explore Senior High School",
   },
 ];
 
@@ -98,7 +110,7 @@ export function ProgramsPanel({
         </div>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
         {PROGRAMS.map((program) => (
           <article
             key={program.title}
@@ -107,31 +119,34 @@ export function ProgramsPanel({
             <div className="space-y-4">
               <div className="relative mb-5 h-48 overflow-hidden rounded-2xl border border-white/40">
                 <Image
-                  src={program.id}
+                  src={program.image}
                   alt={program.alt}
                   fill
-                  sizes="(min-width: 768px) 33vw, 100vw"
+                  sizes="(min-width: 1280px) 300px, (min-width: 640px) 45vw, 100vw"
                   quality={75}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <span className="absolute left-3 top-3 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-forest shadow-sm backdrop-blur-sm">
-                  {program.ages}
-                </span>
               </div>
               <h3 className="font-serif text-2xl font-bold text-forest">
                 {program.title}
               </h3>
-              <p className="text-sm leading-relaxed text-forest">{program.body}</p>
-              <ul className="flex flex-wrap gap-2 pt-2">
-                {program.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="rounded-full border border-white/70 bg-white/60 px-2.5 py-1 text-xs font-semibold text-forest backdrop-blur-sm"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
+              {program.body ? (
+                <p className="text-sm leading-relaxed text-forest">
+                  {program.body}
+                </p>
+              ) : null}
+              {program.tags ? (
+                <ul className="flex flex-wrap gap-2 pt-2">
+                  {program.tags.map((tag) => (
+                    <li
+                      key={tag}
+                      className="rounded-full border border-white/70 bg-white/60 px-2.5 py-1 text-xs font-semibold text-forest backdrop-blur-sm"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
             <div className="pt-6">
               <a

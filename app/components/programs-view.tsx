@@ -3,34 +3,43 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import { UNSPLASH } from "../lib/unsplash";
+import { UNSPLASH, type UnsplashId } from "../lib/unsplash";
 
 /**
  * Programs view, ported from the Stitch export of
  * "Academia International School - Programs Page".
  *
- * Copy, filter labels, card fields, and KPI figures are taken verbatim from that
- * export. The mockup was a single-page app that swapped views with local state;
- * here the Programs view owns a real route and this component owns only the two
- * interactions the design actually had: the track filter pills and the curriculum
- * modal.
+ * The four levels are the school's own list. Fields that are not yet supplied
+ * (tagline, description, badges, highlights, schedule, cohort) are optional and
+ * render nothing rather than a placeholder claim.
  */
 
 const FILTERS = [
   "All",
-  "Ages 4-5 (KG)",
-  "Grades 1-3 (Lower)",
-  "Grades 4-6 (Upper)",
+  "Kindergarten",
+  "Grade School",
+  "Junior High School",
+  "Senior High School",
 ] as const;
 
 type Filter = (typeof FILTERS)[number];
 
-const PROGRAMS = [
+type Program = {
+  id: string;
+  level: string;
+  image: UnsplashId;
+  tagline?: string;
+  description?: string;
+  badges?: readonly string[];
+  keyHighlights?: readonly string[];
+  classTime?: string;
+  capacity?: string;
+};
+
+const PROGRAMS: readonly Program[] = [
   {
     id: "kg",
     level: "Kindergarten",
-    grades: "KG 1 & KG 2",
-    ages: "Ages 4 – 5",
     image: UNSPLASH.kindergarten,
     tagline: "Early Wonder & Foundational Play",
     description:
@@ -51,54 +60,41 @@ const PROGRAMS = [
     capacity: "Max 14 students per homeroom",
   },
   {
-    id: "lower",
-    level: "Lower Primary",
-    grades: "Grades 1 – 3",
-    ages: "Ages 6 – 8",
+    id: "gs",
+    level: "Grade School",
     image: UNSPLASH.lowerPrimary,
     tagline: "Inquiry, Core Literacy & Discovery",
     description:
-      "Solidifying essential reading fluency, Singapore-style mathematical reasoning, and collaborative scientific investigations in a dynamic classroom that celebrates each child’s unique pace.",
+      "Building reading fluency and mathematical reasoning through collaborative scientific investigations, project-based inquiry, computational robotics, debate, and student leadership.",
     badges: [
       "Small Class Sizes",
       "Singapore Math",
-      "Science Explorer Labs",
-      "Dedicated Reading Loft",
+      "STEM & Robotics Lab",
+      "Leadership Incubator",
     ],
     keyHighlights: [
       "Structured Cambridge English & Literature",
       "Concrete-Pictorial-Abstract Math Foundations",
       "Integrated Environmental & Earth Sciences",
-      "Arabic Language & Qatar National Identity",
+      "Algorithm Design & Scratch Coding Lab",
+      "Junior Toastmasters & Public Speaking",
     ],
-    classTime: "7:20 AM – 2:00 PM",
-    capacity: "Max 18 students per homeroom",
   },
   {
-    id: "upper",
-    level: "Upper Primary",
-    grades: "Grades 4 – 6",
-    ages: "Ages 9 – 11",
+    id: "jhs",
+    level: "Junior High School",
     image: UNSPLASH.upperPrimary,
-    tagline: "Independent Mastery & Leadership",
-    description:
-      "Cultivating critical thinkers equipped for middle school transition through advanced project-based inquiry, computational robotics, debate rhetoric, and student council initiatives.",
-    badges: [
-      "Small Class Sizes",
-      "STEM & Robotics Lab",
-      "Leadership Incubator",
-      "Middle School Prep",
-    ],
-    keyHighlights: [
-      "Algorithm Design & Scratch Coding Lab",
-      "Cross-Disciplinary Humanities & Global Issues",
-      "Junior Toastmasters & Public Speaking",
-      "Advanced Arabic & Islamic Cultural Heritage",
-    ],
-    classTime: "7:20 AM – 2:15 PM",
-    capacity: "Max 20 students per homeroom",
   },
-] as const;
+  {
+    id: "shs",
+    level: "Senior High School",
+    image: UNSPLASH.classroom,
+    tagline: "Six Senior High School Strands",
+    description:
+      "Senior High School offers six strands: STEM, ABM, HUMSS, GAS, TVL-HE, and TVL-ICT.",
+    keyHighlights: ["STEM", "ABM", "HUMSS", "GAS", "TVL-HE", "TVL-ICT"],
+  },
+];
 
 const ENRICHMENT_STATS = [
   { value: "1:8", label: "Average Staff Ratio" },
@@ -106,8 +102,6 @@ const ENRICHMENT_STATS = [
   { value: "24+", label: "After-school Clubs" },
   { value: "IB PYP", label: "Candidate School" },
 ] as const;
-
-type Program = (typeof PROGRAMS)[number];
 
 function CheckIcon() {
   return (
@@ -122,12 +116,10 @@ export function ProgramsView() {
   const [selectedTrack, setSelectedTrack] = useState<Filter>("All");
   const [activeModal, setActiveModal] = useState<Program | null>(null);
 
-  const visible = PROGRAMS.filter((program) => {
-    if (selectedTrack === "Ages 4-5 (KG)") return program.id === "kg";
-    if (selectedTrack === "Grades 1-3 (Lower)") return program.id === "lower";
-    if (selectedTrack === "Grades 4-6 (Upper)") return program.id === "upper";
-    return true;
-  });
+  const visible =
+    selectedTrack === "All"
+      ? PROGRAMS
+      : PROGRAMS.filter((program) => program.level === selectedTrack);
 
   return (
     <>
@@ -137,12 +129,11 @@ export function ProgramsView() {
           Academics &amp; Curricula 2025–2026
         </span>
         <h1 className="text-balance font-serif text-4xl font-bold leading-[1.15] tracking-tight text-forest sm:text-5xl lg:text-6xl">
-          Grade School Educational Pathways
+          Educational Pathways
         </h1>
         <p className="mt-5 text-balance text-base leading-relaxed text-forest sm:text-lg">
           Structured inquiry, bilingual excellence, and individualized mentorship
-          tailored for each developmental milestone from ages 4 through 11 in
-          Doha.
+          for every level, from Kindergarten through Senior High School in Doha.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
@@ -164,116 +155,143 @@ export function ProgramsView() {
         </div>
       </section>
 
-      <div className="mt-14 grid grid-cols-1 items-stretch gap-8 md:mt-16 md:grid-cols-3">
-        {visible.map((program) => (
-          <article
-            key={program.id}
-            className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-white/50 bg-white/30 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-glass-lift"
-          >
-            <div>
-              <div className="relative h-56 w-full overflow-hidden bg-sage-bg sm:h-64">
-                <Image
-                  src={program.image}
-                  alt={program.level}
-                  fill
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  quality={75}
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-                <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-                  <span className="inline-block rounded-full bg-forest/90 px-3 py-1 text-xs font-semibold text-white shadow-sm backdrop-blur-sm">
-                    {program.grades}
-                  </span>
-                  <span className="inline-block rounded-full border border-white/70 bg-white/75 px-3 py-1 text-xs font-semibold text-forest shadow-sm backdrop-blur-sm">
-                    {program.ages}
-                  </span>
-                </div>
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h2 className="font-serif text-2xl font-bold tracking-tight drop-shadow-sm">
-                    {program.level}
-                  </h2>
-                  <p className="text-xs font-medium text-emerald-200">
-                    {program.tagline}
-                  </p>
-                </div>
-              </div>
+      <div className="mt-14 grid grid-cols-1 items-stretch gap-8 md:mt-16 md:grid-cols-2">
+        {visible.map((program) => {
+          const hasDetails = Boolean(
+            program.badges ||
+              program.description ||
+              program.keyHighlights ||
+              program.classTime ||
+              program.capacity,
+          );
+          const hasModal = Boolean(
+            program.description || program.keyHighlights,
+          );
 
-              <div className="p-7">
-                <div className="mb-5 flex flex-wrap gap-1.5">
-                  {program.badges.map((badge) => (
-                    <span
-                      key={badge}
-                      className="rounded-full border border-white/70 bg-white/60 px-3 py-1 text-xs font-semibold text-forest backdrop-blur-sm"
-                    >
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="mb-6 text-sm leading-relaxed text-forest">
-                  {program.description}
-                </p>
-
-                <div className="mb-5 border-t border-white/60 pt-5">
-                  <span className="mb-3 block text-[11px] font-bold uppercase tracking-wider text-forest/70">
-                    Core Learning Highlights
-                  </span>
-                  <ul className="space-y-2.5">
-                    {program.keyHighlights.map((highlight) => (
-                      <li
-                        key={highlight}
-                        className="flex items-start gap-2.5 text-xs leading-snug text-forest sm:text-sm"
-                      >
-                        <CheckIcon />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="space-y-1.5 rounded-2xl border border-white/60 bg-white/40 p-3.5 text-xs text-forest backdrop-blur-sm">
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="font-medium text-forest/70">
-                      Daily Schedule:
-                    </span>
-                    <span className="font-semibold">{program.classTime}</span>
-                  </div>
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="font-medium text-forest/70">
-                      Cohort Limit:
-                    </span>
-                    <span className="font-semibold">{program.capacity}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-7 pt-0">
-              <button
-                type="button"
-                onClick={() => setActiveModal(program)}
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-forest-hover hover:shadow-md"
-              >
-                Explore {program.level} Curriculum
-                <svg
-                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M14 5l7 7-7 7"
+          return (
+            <article
+              key={program.id}
+              className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-white/50 bg-white/30 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-glass-lift"
+            >
+              <div>
+                <div className="relative h-56 w-full overflow-hidden bg-sage-bg sm:h-64">
+                  <Image
+                    src={program.image}
+                    alt={program.level}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    quality={75}
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                </svg>
-              </button>
-            </div>
-          </article>
-        ))}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <h2 className="font-serif text-2xl font-bold tracking-tight drop-shadow-sm">
+                      {program.level}
+                    </h2>
+                    {program.tagline ? (
+                      <p className="text-xs font-medium text-emerald-200">
+                        {program.tagline}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+
+                {hasDetails ? (
+                  <div className="p-7">
+                    {program.badges ? (
+                      <div className="mb-5 flex flex-wrap gap-1.5">
+                        {program.badges.map((badge) => (
+                          <span
+                            key={badge}
+                            className="rounded-full border border-white/70 bg-white/60 px-3 py-1 text-xs font-semibold text-forest backdrop-blur-sm"
+                          >
+                            {badge}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    {program.description ? (
+                      <p className="mb-6 text-sm leading-relaxed text-forest">
+                        {program.description}
+                      </p>
+                    ) : null}
+
+                    {program.keyHighlights ? (
+                      <div className="mb-5 border-t border-white/60 pt-5">
+                        <span className="mb-3 block text-[11px] font-bold uppercase tracking-wider text-forest/70">
+                          Core Learning Highlights
+                        </span>
+                        <ul className="space-y-2.5">
+                          {program.keyHighlights.map((highlight) => (
+                            <li
+                              key={highlight}
+                              className="flex items-start gap-2.5 text-xs leading-snug text-forest sm:text-sm"
+                            >
+                              <CheckIcon />
+                              <span>{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+
+                    {program.classTime || program.capacity ? (
+                      <div className="space-y-1.5 rounded-2xl border border-white/60 bg-white/40 p-3.5 text-xs text-forest backdrop-blur-sm">
+                        {program.classTime ? (
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-medium text-forest/70">
+                              Daily Schedule:
+                            </span>
+                            <span className="font-semibold">
+                              {program.classTime}
+                            </span>
+                          </div>
+                        ) : null}
+                        {program.capacity ? (
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-medium text-forest/70">
+                              Cohort Limit:
+                            </span>
+                            <span className="font-semibold">
+                              {program.capacity}
+                            </span>
+                          </div>
+                        ) : null}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+
+              {hasModal ? (
+                <div className={hasDetails ? "p-7 pt-0" : "p-7"}>
+                  <button
+                    type="button"
+                    onClick={() => setActiveModal(program)}
+                    className="flex w-full items-center justify-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-forest-hover hover:shadow-md"
+                  >
+                    Explore {program.level} Curriculum
+                    <svg
+                      className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M14 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ) : null}
+            </article>
+          );
+        })}
       </div>
 
       {/* Enrichment banner */}
@@ -372,27 +390,30 @@ export function ProgramsView() {
             >
               ✕
             </button>
-            <span className="mb-2 inline-block rounded-full border border-white/70 bg-white/60 px-3 py-1 text-xs font-bold uppercase text-forest backdrop-blur-sm">
-              {activeModal.grades} • {activeModal.ages}
-            </span>
             <h2 className="font-serif text-2xl font-bold text-forest md:text-3xl">
               {activeModal.level} Curriculum
             </h2>
-            <p className="mb-6 text-sm text-forest">{activeModal.description}</p>
-            <div className="mb-6 space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-forest/70">
-                Detailed Subject Modules
-              </h3>
-              {activeModal.keyHighlights.map((highlight) => (
-                <div
-                  key={highlight}
-                  className="flex items-center gap-2 rounded-xl border border-white/60 bg-white/50 p-2.5 text-sm text-forest backdrop-blur-sm"
-                >
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-forest" />
-                  <span>{highlight}</span>
-                </div>
-              ))}
-            </div>
+            {activeModal.description ? (
+              <p className="mb-6 text-sm text-forest">
+                {activeModal.description}
+              </p>
+            ) : null}
+            {activeModal.keyHighlights ? (
+              <div className="mb-6 space-y-3">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-forest/70">
+                  Program Details
+                </h3>
+                {activeModal.keyHighlights.map((highlight) => (
+                  <div
+                    key={highlight}
+                    className="flex items-center gap-2 rounded-xl border border-white/60 bg-white/50 p-2.5 text-sm text-forest backdrop-blur-sm"
+                  >
+                    <span className="h-2 w-2 shrink-0 rounded-full bg-forest" />
+                    <span>{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            ) : null}
             <button
               type="button"
               onClick={() => setActiveModal(null)}

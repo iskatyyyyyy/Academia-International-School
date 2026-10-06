@@ -5,9 +5,9 @@ import SiteFooter from "../components/site-footer";
 import { ProgramsView } from "../components/programs-view";
 
 export const metadata: Metadata = {
-  title: "Grade School Programs | Academia International School",
+  title: "Programs | Academia International School",
   description:
-    "Explore the Kindergarten, Lower Primary, and Upper Primary pathways at Academia International School in Doha — curriculum, class times, and cohort details for ages 4 to 11.",
+    "Explore the Kindergarten, Grade School, Junior High School, and Senior High School pathways at Academia International School in Doha — curriculum, class times, and cohort details.",
 };
 
 export default function ProgramsPage() {

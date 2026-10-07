@@ -6,16 +6,15 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 /**
- * Floating pill navigation.
+ * Transparent overlay navigation.
  *
- * The outermost bar is transparent and absolutely positioned so it never veils
- * the hero photograph or the mesh field behind it. Contrast for the forest-green
- * wordmark and links now comes from the white/80 nav pill itself, so the
- * top-lit veil the previous fixed bar needed is gone.
- *
- * Because the header is `absolute` rather than `fixed`, it scrolls away with the
- * page instead of lingering over content. Every page reserves top padding
- * (`pt-24`/`pt-28`) for it, so nothing collides on first paint.
+ * The bar is `fixed top-0 z-50 w-full` on a transparent, borderless and
+ * shadowless wrapper, so it stays visible as a floating track while scrolling
+ * instead of occupying flow height, and it carries no background, blur or
+ * shadow of its own — the hero's top haze (`from-white/50`) is what keeps the
+ * forest-green wordmark legible over the photograph, while the link cluster
+ * sits in its own white pill. Each page's `pt-*` on <main> is the breathing
+ * room under the overlay.
  *
  * Rendered colors use the app's `forest` / `forest-hover` tokens, which are the
  * same #0B3B24 the export hardcoded, to stay consistent with the rest of the
@@ -36,27 +35,32 @@ export default function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="absolute top-0 z-50 w-full bg-transparent pt-4">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6">
-        <Link href="/" className="group flex shrink-0 items-center gap-4">
-          <Image
-            src="/aid-logo.png"
-            alt="Academia International School logo"
-            width={499}
-            height={500}
-            className="h-16 w-16 shrink-0 object-contain transition-transform group-hover:scale-105"
-          />
+    <header className="fixed left-0 top-0 z-50 flex w-full justify-center bg-transparent pb-2 pt-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6">
+        <Link
+          href="/"
+          className="group flex min-w-0 items-center gap-5 transition-all duration-300"
+        >
+          <div className="relative w-24 h-24 bg-white rounded-full overflow-hidden flex items-center justify-center p-0">
+            <Image
+              src="/academia-international-school.png"
+              alt="Academia International School logo"
+              width={800}
+              height={800}
+              className="object-cover scale-[1.15]"
+            />
+          </div>
           <span>
-            <span className="block font-serif text-lg font-bold leading-none tracking-tight text-forest">
+            <span className="block font-serif text-xl font-bold leading-none tracking-tight text-forest">
               Academia International
             </span>
-            <span className="text-[11px] font-semibold uppercase tracking-widest text-forest">
+            <span className="text-xs font-semibold uppercase tracking-widest text-forest">
               Al-noor Educational Center
             </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-2 rounded-full bg-white/80 px-2 py-1.5 shadow-sm backdrop-blur-md md:flex">
+        <nav className="hidden shrink-0 items-center rounded-full border border-white/30 bg-white/40 px-2 py-1.5 shadow-sm backdrop-blur-md md:flex">
           {NAV.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -66,8 +70,8 @@ export default function SiteHeader() {
                 aria-current={isActive ? "page" : undefined}
                 className={
                   isActive
-                    ? "rounded-full bg-forest px-4 py-1.5 text-sm font-medium text-white"
-                    : "rounded-full px-4 py-1.5 text-sm font-medium text-forest transition-colors hover:bg-white/50"
+                    ? "rounded-full bg-[#004d36] px-4 py-2 text-sm font-medium text-white transition-all duration-300 ease-in-out hover:bg-[#003b29] hover:shadow-md hover:scale-105 active:scale-95"
+                    : "rounded-full px-4 py-2 text-sm font-medium text-green-900 transition-all duration-300 ease-in-out hover:bg-white/20 hover:scale-105 active:scale-95"
                 }
               >
                 {item.label}
@@ -78,7 +82,7 @@ export default function SiteHeader() {
 
         <Link
           href="/admissions"
-          className="hidden shrink-0 items-center gap-2 rounded-full bg-forest px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:scale-[1.02] hover:bg-forest-hover hover:shadow-md lg:flex"
+          className="hidden shrink-0 items-center gap-2 rounded-full bg-forest px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:bg-forest-hover hover:shadow-md lg:flex"
         >
           Enroll now
           <svg
@@ -146,8 +150,8 @@ export default function SiteHeader() {
                 onClick={() => setMenuOpen(false)}
                 className={
                   isActive
-                    ? "block w-full rounded-full bg-forest px-4 py-2.5 text-left text-sm font-medium text-white"
-                    : "block w-full rounded-full px-4 py-2.5 text-left text-sm font-medium text-forest transition-colors hover:bg-white/50"
+                    ? "block w-full rounded-full bg-[#004d36] px-4 py-2.5 text-left text-sm font-medium text-white transition-colors"
+                    : "block w-full rounded-full px-4 py-2.5 text-left text-sm font-medium text-forest transition-colors hover:bg-green-50/50 hover:text-green-900 hover:pl-6"
                 }
               >
                 {item.label}

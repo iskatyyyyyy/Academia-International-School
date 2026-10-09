@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { UNSPLASH, type UnsplashId } from "../lib/unsplash";
 
 /**
  * Program content for the home page panel and the standalone view.
@@ -8,7 +7,7 @@ import { UNSPLASH, type UnsplashId } from "../lib/unsplash";
  * the same pathways from one source and cannot drift apart.
  */
 type Program = {
-  image: UnsplashId;
+  image: string;
   alt: string;
   title: string;
   body?: string;
@@ -18,7 +17,7 @@ type Program = {
 
 const PROGRAMS: readonly Program[] = [
   {
-    image: UNSPLASH.kindergarten,
+    image: "/ADM 8.jpg",
     alt: "Kindergarten children at play",
     title: "Kindergarten",
     body: "Structured play-based learning that awakens phonics, early numeracy, emotional regulation, and joyful social collaboration in a warm, welcoming setting.",
@@ -26,7 +25,7 @@ const PROGRAMS: readonly Program[] = [
     cta: "Explore Kindergarten",
   },
   {
-    image: UNSPLASH.lowerPrimary,
+    image: "/ADM 9.jpg",
     alt: "Students working together",
     title: "Grade School",
     body: "Building reading fluency and mathematical reasoning through collaborative scientific investigations, project-based inquiry, computational robotics, debate, and student leadership.",
@@ -34,14 +33,14 @@ const PROGRAMS: readonly Program[] = [
     cta: "Explore Grade School",
   },
   {
-    image: UNSPLASH.upperPrimary,
+    image: "/ADM 10.jpg",
     alt: "Students in a science classroom",
     title: "Junior High School",
     body: "The Junior High School Program provides students with a strong academic foundation, essential life skills, and personal development to prepare them for Senior High School and future success.",
     cta: "Explore Junior High School",
   },
   {
-    image: UNSPLASH.classroom,
+    image: "/ADM 10.jpg",
     alt: "Students working together at classroom desks",
     title: "Senior High School",
     body: "Senior High School offers six strands: STEM, ABM, HUMSS, GAS, TVL-HE, and TVL-ICT.",

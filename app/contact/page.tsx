@@ -21,7 +21,7 @@ import { UNSPLASH } from "../lib/unsplash";
 export const metadata: Metadata = {
   title: "Contact & Visit Us | Academia International School",
   description:
-    "Reach the AIS admissions desk, parent-teacher support, and finance offices, or schedule a guided campus walkthrough in Al Mamoura, Doha.",
+    "Reach the AIS admissions desk or schedule a guided campus walkthrough in Al Mamoura, Doha.",
 };
 
 /** Inline SVG paths, verbatim from the export. */
@@ -86,50 +86,10 @@ const DEPARTMENTS = [
     href: "https://wa.me/97430603366",
     external: true,
   },
-  {
-    id: "academic",
-    badge: "Academic & Pastoral Care",
-    status: "Available",
-    title: "Parent-Teacher Support",
-    description:
-      "Direct coordination with grade-level teaching coordinators, bilingual language specialists, and student wellbeing mentors across all primary cohorts.",
-    details: [
-      { icon: "clock", label: "Hours", value: "Sun – Thu: 7:15 AM – 2:45 PM" },
-      { icon: "phone", label: "Phone", value: "+974 3060 3366" },
-      { icon: "mail", label: "Email", value: "info@academiaedu.org" },
-      {
-        icon: "building",
-        label: "Office",
-        value: "Academic Admin Suite, Bldg 42, Fl 1",
-      },
-    ],
-    cta: "Schedule Teacher Conference →",
-    href: "#inquiry-form",
-    external: false,
-  },
-  {
-    id: "finance",
-    badge: "Tuition & Accounts",
-    status: "Bursar Open",
-    title: "Finance & Tuition Office",
-    description:
-      "Tuition schedules, corporate sibling benefits, payment installment arrangements, and Qatar Ministry educational voucher verification.",
-    details: [
-      { icon: "clock", label: "Hours", value: "Sun – Thu: 7:30 AM – 2:00 PM" },
-      { icon: "phone", label: "Phone", value: "+974 3060 3366" },
-      { icon: "mail", label: "Email", value: "info@academiaedu.org" },
-      { icon: "building", label: "Office", value: "Administration Bursar Wing, Ground Fl" },
-    ],
-    cta: "Download Fee Schedule 2025/26 ↘",
-    href: "#fee-schedule",
-    external: false,
-  },
 ] as const;
 
 const DEPARTMENT_OPTIONS = [
   { value: "admissions", label: "Admissions Desk (KG to Grade 6)" },
-  { value: "academic", label: "Academic & Pastoral Care" },
-  { value: "finance", label: "Tuition & Billing Office" },
   { value: "general", label: "General Campus Inquiry" },
 ] as const;
 
@@ -202,7 +162,7 @@ export default function ContactPage() {
 
           {/* Department directory */}
           <section className="mb-14">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+            <div className="mx-auto grid max-w-md grid-cols-1 gap-6">
               {DEPARTMENTS.map((dept) => (
                 <article
                   key={dept.id}
@@ -462,7 +422,7 @@ export default function ContactPage() {
 
               <div className="mt-6 flex flex-col gap-3 border-t border-white/60 pt-6 sm:flex-row">
                 <a
-                  href="https://maps.google.com"
+                  href="https://www.google.com/maps/search/?api=1&query=Bldg.%2025%2C%20Street%20623%2C%20Zone%2043%2C%20Ahmed%20Bin%20Hazem%20St.%20Al%20Mamoura%2C%20Doha%2C%20Qatar"
                   rel="noopener noreferrer"
                   target="_blank"
                   className="inline-flex flex-1 items-center justify-center rounded-full bg-forest px-4 py-3 text-center text-xs font-semibold text-white shadow-md transition-colors hover:bg-forest-hover"

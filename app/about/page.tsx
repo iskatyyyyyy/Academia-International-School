@@ -34,44 +34,23 @@ const CORE_FEATURES = [
   },
 ] as const;
 
-const PILLARS = [
-  {
-    title: "Inquiry-Driven Discovery",
-    body: "Hands-on investigative learning where curiosity leads each lesson, developing critical thinking from kindergarten onward.",
-    footer: "Active Investigation",
-    icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
-  },
-  {
-    title: "Bilingual Excellence",
-    body: "Fluency in English and Arabic, deeply honoring local Qatari heritage while cultivating a global perspective.",
-    footer: "Dual-Language Fluency",
-    icon: "M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129",
-  },
-  {
-    title: "Emotional & Physical Safety",
-    body: "Anti-bullying pastoral care, certified child wellbeing coaches, and advanced secure campus parameters.",
-    footer: "Wellbeing First",
-    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
-  },
-  {
-    title: "Moral Character & Empathy",
-    body: "Community service, respectful dialogue, kindness initiatives, and proactive planetary stewardship.",
-    footer: "Values-Led Action",
-    icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
-  },
-] as const;
-
 const FACULTY = [
   {
     src: "/AIS FACULTY 1.jpeg",
+    width: 1206,
+    height: 1655,
     alt: "Faculty member of Academia International School",
   },
   {
     src: "/AIS FACULTY 2.jpeg",
+    width: 1206,
+    height: 1655,
     alt: "Faculty member of Academia International School",
   },
   {
     src: "/AIS FACULTY 3.jpeg",
+    width: 1206,
+    height: 1662,
     alt: "Faculty member of Academia International School",
   },
 ] as const;
@@ -253,102 +232,34 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* Pillars of Academia International */}
+          {/* Pillars of Academia — faculty */}
           <section className="mb-8 mt-4">
             <div className="mx-auto mb-10 max-w-xl text-center">
               <span className="text-xs font-bold uppercase tracking-widest text-forest/70">
-                Our Anchor Values
+                Our Faculty
               </span>
               <h2 className="mt-1 font-serif text-3xl font-bold text-forest">
-                Pillars of Academia International
+                Pillars of Academia
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {PILLARS.map((pillar) => (
-                <article
-                  key={pillar.title}
-                  className="flex flex-col justify-between rounded-3xl border border-white/50 bg-white/30 p-6 shadow-xl backdrop-blur-md transition-shadow hover:shadow-glass-lift"
+            <div className="columns-1 gap-6 sm:columns-2 [&>figure]:mb-6">
+              {FACULTY.map((photo) => (
+                <figure
+                  key={photo.src}
+                  className="break-inside-avoid overflow-hidden rounded-3xl border border-white/50 shadow-xl"
                 >
-                  <div>
-                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/70 bg-white/60 text-forest backdrop-blur-sm">
-                      <svg
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d={pillar.icon}
-                        />
-                      </svg>
-                    </div>
-                    <h3 className="mb-2 font-serif text-lg font-bold text-forest">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-xs leading-relaxed text-forest/75 sm:text-sm">
-                      {pillar.body}
-                    </p>
-                  </div>
-                  <div className="mt-6 flex items-center gap-1 border-t border-white/60 pt-4 text-[11px] font-semibold tracking-wide text-forest">
-                    {pillar.footer} <span aria-hidden="true">→</span>
-                  </div>
-                </article>
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={photo.width}
+                    height={photo.height}
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                    quality={75}
+                    className="h-auto w-full transition-transform duration-500 hover:scale-105"
+                  />
+                </figure>
               ))}
-            </div>
-          </section>
-
-          {/* Faculty pictures */}
-          <section className="mb-8 mt-4">
-            <div className="mx-auto mb-10 max-w-xl text-center">
-              <span className="text-xs font-bold uppercase tracking-widest text-forest/70">
-                The People of AIS
-              </span>
-              <h2 className="mt-1 font-serif text-3xl font-bold text-forest">
-                Meet Our Faculty
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div className="grid gap-6">
-                {FACULTY.slice(0, 2).map((photo) => (
-                  <figure
-                    key={photo.src}
-                    className="relative h-72 overflow-hidden rounded-3xl border border-white/50 shadow-xl"
-                  >
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      sizes="(min-width: 640px) 50vw, 100vw"
-                      quality={75}
-                      className="object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                  </figure>
-                ))}
-              </div>
-
-              <div className="grid gap-6">
-                {FACULTY.slice(2).map((photo) => (
-                  <figure
-                    key={photo.src}
-                    className="relative h-full min-h-72 overflow-hidden rounded-3xl border border-white/50 shadow-xl"
-                  >
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      sizes="(min-width: 640px) 50vw, 100vw"
-                      quality={75}
-                      className="object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                  </figure>
-                ))}
-              </div>
             </div>
           </section>
         </div>

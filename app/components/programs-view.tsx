@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import { UNSPLASH, type UnsplashId } from "../lib/unsplash";
-
 /**
  * Programs view, ported from the Stitch export of
  * "Academia International School - Programs Page".
@@ -27,7 +25,7 @@ type Filter = (typeof FILTERS)[number];
 type Program = {
   id: string;
   level: string;
-  image: UnsplashId;
+  image: string;
   tagline?: string;
   description?: string;
   badges?: readonly string[];
@@ -40,7 +38,7 @@ const PROGRAMS: readonly Program[] = [
   {
     id: "kg",
     level: "Kindergarten",
-    image: UNSPLASH.kindergarten,
+    image: "/ADM 8.jpg",
     tagline: "Early Wonder & Foundational Play",
     description:
       "A nurturing, inquiry-driven environment integrating Montessori sensory principles with joyful guided play, building self-confidence, phonics mastery, and bilingual empathy from day one.",
@@ -62,7 +60,7 @@ const PROGRAMS: readonly Program[] = [
   {
     id: "gs",
     level: "Grade School",
-    image: UNSPLASH.lowerPrimary,
+    image: "/ADM 9.jpg",
     tagline: "Inquiry, Core Literacy & Discovery",
     description:
       "Building reading fluency and mathematical reasoning through collaborative scientific investigations, project-based inquiry, computational robotics, debate, and student leadership.",
@@ -83,14 +81,23 @@ const PROGRAMS: readonly Program[] = [
   {
     id: "jhs",
     level: "Junior High School",
-    image: UNSPLASH.upperPrimary,
+    image: "/ADM 10.jpg",
+    tagline: "Strong Foundations for Senior High & Beyond",
     description:
       "The Junior High School Program provides students with a strong academic foundation, essential life skills, and personal development to prepare them for Senior High School and future success.",
+    keyHighlights: [
+      "Advanced English, Literature & Research Writing",
+      "Algebra, Geometry & Scientific Inquiry",
+      "Integrated Sciences with Laboratory Investigations",
+      "Arabic Language, Islamic Studies & Qatar History",
+      "Critical Thinking, Debate & Student Leadership",
+      "Digital Literacy, Coding & Robotics",
+    ],
   },
   {
     id: "shs",
     level: "Senior High School",
-    image: UNSPLASH.classroom,
+    image: "/ADM 10.jpg",
     tagline: "Six Senior High School Strands",
     description:
       "Senior High School offers six strands: STEM, ABM, HUMSS, GAS, TVL-HE, and TVL-ICT.",

@@ -397,26 +397,15 @@ export default function ContactPage() {
                   ))}
                 </div>
 
-                <div className="group relative h-56 overflow-hidden rounded-2xl border border-white/60">
-                  <Image
-                    src={UNSPLASH.campusAerial}
-                    alt="Aerial view of the modern primary school campus in the Al Mamoura district of Doha, Qatar"
-                    fill
-                    sizes="(min-width: 1024px) 40vw, 90vw"
-                    quality={75}
-                    className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:group-hover:scale-100"
+                <div className="overflow-hidden rounded-2xl border border-white/60 shadow-sm">
+                  <iframe
+                    title="Academia International School campus location on Google Maps"
+                    src="https://www.google.com/maps?q=Bldg.%2025%2C%20Street%20623%2C%20Zone%2043%2C%20Ahmed%20Bin%20Hazem%20St.%20Al%20Mamoura%2C%20Doha%2C%20Qatar&output=embed"
+                    className="h-64 w-full border-0"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
                   />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 rounded-xl border border-white/70 bg-white/70 px-3 py-2 text-xs shadow-sm backdrop-blur-md">
-                    <div className="flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-600 motion-safe:animate-ping" />
-                      <span className="font-semibold text-forest">
-                        Academia International School • Al Mamoura
-                      </span>
-                    </div>
-                    <span className="shrink-0 font-mono text-[10px] text-forest/70">
-                      Zone 43
-                    </span>
-                  </div>
                 </div>
               </div>
 

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const EXPLORE = [
   { href: "#top", label: "Home Page" },
   { href: "#programs", label: "Programs" },
@@ -57,16 +59,20 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-4 lg:col-span-2">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white font-serif text-xl font-bold text-forest">
-                A
-              </span>
+            <div className="flex items-center gap-4">
+              <Image
+                src="/academia-international-school.png"
+                alt="Academia International School logo"
+                width={499}
+                height={500}
+                className="h-16 w-16 shrink-0 object-contain"
+              />
               <div>
                 <h4 className="font-serif text-xl font-bold tracking-tight text-white">
                   Academia International
                 </h4>
                 <p className="text-xs font-semibold uppercase tracking-widest text-white/60">
-                  Grade School of Doha
+                  Al-noor Educational Center
                 </p>
               </div>
             </div>

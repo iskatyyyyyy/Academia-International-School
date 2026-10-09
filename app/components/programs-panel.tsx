@@ -37,6 +37,7 @@ const PROGRAMS: readonly Program[] = [
     image: UNSPLASH.upperPrimary,
     alt: "Students in a science classroom",
     title: "Junior High School",
+    body: "The Junior High School Program provides students with a strong academic foundation, essential life skills, and personal development to prepare them for Senior High School and future success.",
     cta: "Explore Junior High School",
   },
   {

@@ -61,6 +61,21 @@ const PILLARS = [
   },
 ] as const;
 
+const FACULTY = [
+  {
+    src: "/AIS FACULTY 1.jpeg",
+    alt: "Faculty member of Academia International School",
+  },
+  {
+    src: "/AIS FACULTY 2.jpeg",
+    alt: "Faculty member of Academia International School",
+  },
+  {
+    src: "/AIS FACULTY 3.jpeg",
+    alt: "Faculty member of Academia International School",
+  },
+] as const;
+
 const CHECK_PATH =
   "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z";
 const ARROW_PATH = "M14 5l7 7m0 0l-7 7m7-7H3";
@@ -238,14 +253,14 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* Four pillars */}
+          {/* Pillars of Academia International */}
           <section className="mb-8 mt-4">
             <div className="mx-auto mb-10 max-w-xl text-center">
               <span className="text-xs font-bold uppercase tracking-widest text-forest/70">
                 Our Anchor Values
               </span>
               <h2 className="mt-1 font-serif text-3xl font-bold text-forest">
-                Four Pillars of Academic Life
+                Pillars of Academia International
               </h2>
             </div>
 
@@ -284,6 +299,56 @@ export default function AboutPage() {
                   </div>
                 </article>
               ))}
+            </div>
+          </section>
+
+          {/* Faculty pictures */}
+          <section className="mb-8 mt-4">
+            <div className="mx-auto mb-10 max-w-xl text-center">
+              <span className="text-xs font-bold uppercase tracking-widest text-forest/70">
+                The People of AIS
+              </span>
+              <h2 className="mt-1 font-serif text-3xl font-bold text-forest">
+                Meet Our Faculty
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div className="grid gap-6">
+                {FACULTY.slice(0, 2).map((photo) => (
+                  <figure
+                    key={photo.src}
+                    className="relative h-72 overflow-hidden rounded-3xl border border-white/50 shadow-xl"
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      sizes="(min-width: 640px) 50vw, 100vw"
+                      quality={75}
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  </figure>
+                ))}
+              </div>
+
+              <div className="grid gap-6">
+                {FACULTY.slice(2).map((photo) => (
+                  <figure
+                    key={photo.src}
+                    className="relative h-full min-h-72 overflow-hidden rounded-3xl border border-white/50 shadow-xl"
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      sizes="(min-width: 640px) 50vw, 100vw"
+                      quality={75}
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  </figure>
+                ))}
+              </div>
             </div>
           </section>
         </div>

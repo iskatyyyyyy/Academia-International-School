@@ -497,7 +497,7 @@ export default function AdmissionsPage() {
                   </div>
 
                   <a
-                    href="https://wa.me/97444882300"
+                    href="https://wa.me/97430603366"
                     rel="noopener noreferrer"
                     target="_blank"
                     className="mb-4 flex w-full items-center justify-center gap-2 rounded-full bg-forest px-4 py-3 text-xs font-bold uppercase tracking-wide text-white shadow-md transition-all hover:bg-forest-hover"
@@ -510,13 +510,13 @@ export default function AdmissionsPage() {
                     <div className="flex items-center gap-2.5">
                       <Glyph name="call" className="h-3.5 w-3.5 text-forest" />
                       <span className="font-semibold">
-                        +974 4488 2300 (Ext. 104)
+                        +974 3060 3366
                       </span>
                     </div>
                     <div className="flex items-center gap-2.5">
                       <Glyph name="mail" className="h-3.5 w-3.5 text-forest" />
                       <span className="font-semibold">
-                        admissions@ais-doha.qa
+                        info@academiaedu.org
                       </span>
                     </div>
                     <div className="flex items-start gap-2.5">
@@ -546,7 +546,7 @@ export default function AdmissionsPage() {
                   </div>
                   <p className="mb-4 text-xs leading-relaxed text-forest/80">
                     Experience our outdoor learning courtyards, STEM suites, and
-                    Olympic swimming complex first-hand in Al Waab.
+                    Olympic swimming complex first-hand in Al Mamoura.
                   </p>
                   <button
                     type="button"

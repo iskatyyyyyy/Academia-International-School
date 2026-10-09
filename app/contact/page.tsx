@@ -21,7 +21,7 @@ import { UNSPLASH } from "../lib/unsplash";
 export const metadata: Metadata = {
   title: "Contact & Visit Us | Academia International School",
   description:
-    "Reach the AIS admissions desk, parent-teacher support, and finance offices, or schedule a guided campus walkthrough in Al Waab, Doha.",
+    "Reach the AIS admissions desk, parent-teacher support, and finance offices, or schedule a guided campus walkthrough in Al Mamoura, Doha.",
 };
 
 /** Inline SVG paths, verbatim from the export. */
@@ -74,8 +74,8 @@ const DEPARTMENTS = [
       "For kindergarten through grade 6 enrollment inquiries, application status verification, and personalized campus walkthroughs with our academic leadership.",
     details: [
       { icon: "clock", label: "Hours", value: "Sun – Thu: 7:30 AM – 3:30 PM (AST)" },
-      { icon: "phone", label: "Phone", value: "+974 4488 2300 (Ext. 101)" },
-      { icon: "mail", label: "Email", value: "admissions@ais-doha.qa" },
+      { icon: "phone", label: "Phone", value: "+974 3060 3366" },
+      { icon: "mail", label: "Email", value: "info@academiaedu.org" },
       {
         icon: "person",
         label: "Lead Contact",
@@ -83,7 +83,7 @@ const DEPARTMENTS = [
       },
     ],
     cta: "Connect via WhatsApp Desk →",
-    href: "https://wa.me/97444882300",
+    href: "https://wa.me/97430603366",
     external: true,
   },
   {
@@ -95,8 +95,8 @@ const DEPARTMENTS = [
       "Direct coordination with grade-level teaching coordinators, bilingual language specialists, and student wellbeing mentors across all primary cohorts.",
     details: [
       { icon: "clock", label: "Hours", value: "Sun – Thu: 7:15 AM – 2:45 PM" },
-      { icon: "phone", label: "Phone", value: "+974 4488 2300 (Ext. 104)" },
-      { icon: "mail", label: "Email", value: "primarysupport@ais-doha.qa" },
+      { icon: "phone", label: "Phone", value: "+974 3060 3366" },
+      { icon: "mail", label: "Email", value: "info@academiaedu.org" },
       {
         icon: "building",
         label: "Office",
@@ -116,8 +116,8 @@ const DEPARTMENTS = [
       "Tuition schedules, corporate sibling benefits, payment installment arrangements, and Qatar Ministry educational voucher verification.",
     details: [
       { icon: "clock", label: "Hours", value: "Sun – Thu: 7:30 AM – 2:00 PM" },
-      { icon: "phone", label: "Phone", value: "+974 4488 2300 (Ext. 108)" },
-      { icon: "mail", label: "Email", value: "finance@ais-doha.qa" },
+      { icon: "phone", label: "Phone", value: "+974 3060 3366" },
+      { icon: "mail", label: "Email", value: "info@academiaedu.org" },
       { icon: "building", label: "Office", value: "Administration Bursar Wing, Ground Fl" },
     ],
     cta: "Download Fee Schedule 2025/26 ↘",
@@ -145,7 +145,8 @@ const FACILITIES = [
   {
     icon: "pin",
     label: "Campus Address",
-    value: "Al Waab Street, Zone 55, Building 42, Doha, State of Qatar",
+    value:
+      "Bldg. 25, Street 623, Zone 43, Ahmed Bin Hazem St. Al Mamoura, Doha, Qatar",
   },
   {
     icon: "info",
@@ -187,7 +188,7 @@ export default function ContactPage() {
           <section className="mx-auto max-w-3xl pb-12 pt-4 text-center">
             <div className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-white/60 bg-white/50 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-forest backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-forest motion-safe:animate-pulse" />
-              Get in Touch • Al Waab, Doha
+              Get in Touch • Al Mamoura, Doha
             </div>
             <h1 className="mb-5 text-balance font-serif text-4xl font-medium leading-[1.15] tracking-tight text-forest sm:text-5xl lg:text-6xl">
               We are Here to Guide Your Family
@@ -195,7 +196,7 @@ export default function ContactPage() {
             <p className="mx-auto max-w-2xl text-base leading-relaxed text-forest/80 sm:text-lg">
               Whether you are inquiring about 2025/26 admissions, scheduling a
               guided discovery walkthrough, or seeking student support, our
-              dedicated administration team in Al Waab is ready to assist.
+              dedicated administration team in Al Mamoura is ready to assist.
             </p>
           </section>
 
@@ -390,7 +391,7 @@ export default function ContactPage() {
                       className="cursor-pointer text-xs font-normal leading-normal tracking-normal text-forest/80"
                     >
                       I would also like to schedule an in-person campus
-                      walkthrough and classroom observation in Al Waab.
+                      walkthrough and classroom observation in Al Mamoura.
                     </label>
                   </div>
 
@@ -413,10 +414,10 @@ export default function ContactPage() {
               <div>
                 <span className={GLASS_PILL}>DOHA CAMPUS LOCATION</span>
                 <h2 className="mb-3 mt-3 font-serif text-3xl font-semibold text-forest sm:text-4xl">
-                  Visit Our Sunlit Al Waab Campus
+                  Visit Our Sunlit Al Mamoura Campus
                 </h2>
                 <p className="mb-6 text-sm leading-relaxed text-forest/80">
-                  Situated within the central educational cluster of Al Waab, our
+                  Situated within the central educational cluster of Al Mamoura, our
                   state-of-the-art grade school facility provides a tranquil and
                   secure learning environment.
                 </p>
@@ -439,7 +440,7 @@ export default function ContactPage() {
                 <div className="group relative h-56 overflow-hidden rounded-2xl border border-white/60">
                   <Image
                     src={UNSPLASH.campusAerial}
-                    alt="Aerial view of the modern primary school campus in the Al Waab district of Doha, Qatar"
+                    alt="Aerial view of the modern primary school campus in the Al Mamoura district of Doha, Qatar"
                     fill
                     sizes="(min-width: 1024px) 40vw, 90vw"
                     quality={75}
@@ -449,11 +450,11 @@ export default function ContactPage() {
                     <div className="flex items-center gap-2">
                       <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-600 motion-safe:animate-ping" />
                       <span className="font-semibold text-forest">
-                        Academia International School • Al Waab
+                        Academia International School • Al Mamoura
                       </span>
                     </div>
                     <span className="shrink-0 font-mono text-[10px] text-forest/70">
-                      Zone 55
+                      Zone 43
                     </span>
                   </div>
                 </div>

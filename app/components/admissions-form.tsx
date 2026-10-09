@@ -474,7 +474,7 @@ export function AdmissionsForm() {
             availability, sibling discounts, and student readiness.
           </p>
           <a
-            href="https://api.whatsapp.com/send?phone=97444882300&text=Hello%20Academia%20International%20School%2C%20I%20would%20like%20to%20inquire%20about%20Grade%20School%20Admissions"
+            href="https://api.whatsapp.com/send?phone=97430603366&text=Hello%20Academia%20International%20School%2C%20I%20would%20like%20to%20inquire%20about%20Grade%20School%20Admissions"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex w-full items-center justify-center gap-2.5 rounded-full bg-forest px-4 py-3.5 text-xs font-bold text-white shadow-md transition hover:bg-forest-hover"
@@ -491,7 +491,7 @@ export function AdmissionsForm() {
           <dl className="space-y-2 border-t border-forest/10 pt-4 text-xs text-forest/70">
             <div className="flex items-center justify-between">
               <dt className="text-forest/70">Direct Office Line:</dt>
-              <dd className="font-semibold text-forest">+974 4488 2301</dd>
+              <dd className="font-semibold text-forest">+974 3060 3366</dd>
             </div>
             <div className="flex items-center justify-between">
               <dt className="text-forest/70">Working Hours:</dt>

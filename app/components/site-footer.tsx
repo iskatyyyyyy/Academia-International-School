@@ -133,10 +133,11 @@ export default function SiteFooter() {
             </h5>
             <div className="space-y-2.5 text-xs leading-relaxed text-white/70">
               <ContactRow d={PIN}>
-                Al Waab Street, Zone 55, Building 42, Doha, State of Qatar
+                Bldg. 25, Street 623, Zone 43, Ahmed Bin Hazem St. Al Mamoura,
+                Doha, Qatar
               </ContactRow>
-              <ContactRow d={PHONE}>+974 4488 2300</ContactRow>
-              <ContactRow d={MAIL}>admissions@ais-doha.edu.qa</ContactRow>
+              <ContactRow d={PHONE}>+974 3060 3366</ContactRow>
+              <ContactRow d={MAIL}>info@academiaedu.org</ContactRow>
             </div>
           </div>
         </div>

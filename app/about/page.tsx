@@ -179,14 +179,14 @@ export default function AboutPage() {
               </div>
 
               <div className="relative lg:col-span-6">
-                <div className="relative overflow-hidden rounded-3xl border border-white/50 shadow-md">
+                <div className="relative h-[520px] overflow-hidden rounded-3xl border border-white/50 shadow-md">
                   <Image
                     src="/AIS 12.jpg"
                     alt="Students of Academia International School learning together in Doha"
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     quality={75}
-                    className="h-[520px] w-full object-cover"
+                    className="object-cover"
                   />
                   <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 

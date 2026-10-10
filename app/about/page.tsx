@@ -4,7 +4,6 @@ import Link from "next/link";
 import MeshBackground from "../components/mesh-background";
 import SiteHeader from "../components/site-header";
 import SiteFooter from "../components/site-footer";
-import { UNSPLASH } from "../lib/unsplash";
 
 /**
  * About view, ported from the Stitch export of
@@ -135,16 +134,6 @@ export default function AboutPage() {
                   ))}
                 </div>
 
-                <div className="mb-8 rounded-2xl border-l-4 border-forest bg-white/40 p-5 backdrop-blur-sm">
-                  <p className="font-serif text-xs italic leading-relaxed text-forest/90 sm:text-sm">
-                    “At AIS Grade School, every hallway is designed as a second
-                    teacher—nurturing curiosity before compliance.”
-                  </p>
-                  <span className="mt-2 block text-xs font-bold tracking-wide text-forest">
-                    — Dr. Mariam Al-Kuwari, Head of Primary
-                  </span>
-                </div>
-
                 <div className="flex flex-wrap items-center gap-3">
                   <Link
                     href="/#campus"
@@ -192,8 +181,8 @@ export default function AboutPage() {
               <div className="relative lg:col-span-6">
                 <div className="relative overflow-hidden rounded-3xl border border-white/50 shadow-md">
                   <Image
-                    src={UNSPLASH.campusCourtyard}
-                    alt="Teacher guiding young students in a sunlit courtyard garden classroom at an international grade school campus in Doha"
+                    src="/AIS 12.jpg"
+                    alt="Students of Academia International School learning together in Doha"
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     quality={75}

@@ -117,8 +117,8 @@ export default function AdmissionsPage() {
           {/* Campus banner */}
           <div className="relative h-56 w-full overflow-hidden rounded-3xl shadow-md md:h-72">
             <Image
-              src={UNSPLASH.campusBanner}
-              alt="Children sitting on outdoor carpets around low wooden tables with an educator in a sunlit courtyard garden classroom"
+              src="/AIS 16-cropped.png"
+              alt="Academia International School campus in Doha, Qatar"
               fill
               priority
               sizes="(min-width: 1280px) 1280px, 100vw"

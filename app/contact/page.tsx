@@ -3,7 +3,6 @@ import Image from "next/image";
 import MeshBackground from "../components/mesh-background";
 import SiteHeader from "../components/site-header";
 import SiteFooter from "../components/site-footer";
-import { UNSPLASH } from "../lib/unsplash";
 
 /**
  * Contact & Visit Us, ported from the Stitch export of
@@ -456,7 +455,7 @@ export default function ContactPage() {
               <div className="md:col-span-5">
                 <div className="relative h-56 overflow-hidden rounded-2xl border border-white/60 sm:h-64">
                   <Image
-                    src={UNSPLASH.classroom}
+                    src="/AIS 13.jpg"
                     alt="A primary school teacher guiding young students through a sunlit courtyard garden classroom on a modern Doha campus"
                     fill
                     sizes="(min-width: 768px) 40vw, 90vw"

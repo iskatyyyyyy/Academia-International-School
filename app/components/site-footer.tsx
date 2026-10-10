@@ -65,7 +65,7 @@ export default function SiteFooter() {
                 alt="Academia International School logo"
                 width={499}
                 height={500}
-                className="h-16 w-16 shrink-0 object-contain"
+                className="h-16 w-16 shrink-0 rounded-full object-cover"
               />
               <div>
                 <h4 className="font-serif text-xl font-bold tracking-tight text-white">

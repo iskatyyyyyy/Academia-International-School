@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: "Grade School | Academia International School, Doha",
   description:
     "An inspiring primary education environment in Doha where inquiry, holistic character, and international excellence thrive side by side.",
+  icons: {
+    icon: "/academia-international-school.png",
+    apple: "/academia-international-school.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
